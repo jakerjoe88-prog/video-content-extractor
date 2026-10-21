@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "./styles-qiushi.css";
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body { -webkit-font-smoothing: antialiased; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-thumb { background: #cbd7ce; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #a9bcaf; }
+}
+.subtle-border { border: 1px solid #dce4de; }
+.container-centered { max-width: 1024px; margin-inline: auto; padding-inline: 24px; }
+.gradient-primary { background: #245442; }
+.animate-enter { animation: qiushi-enter .16s ease-out; }
+.lucide { stroke-width: 1.65; }
+@keyframes progress-indeterminate {
+  0% { transform: translateX(-100%) scaleX(.2); }
+  50% { transform: translateX(0) scaleX(.5); }
+  100% { transform: translateX(100%) scaleX(.2); }
+}
+.animate-indeterminate-loading { animation: progress-indeterminate 1.5s infinite linear; }

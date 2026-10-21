@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "视频内容提取器",
+  "version": "1.2.1",
+  "identifier": "com.qiushikl.bilibili",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://127.0.0.1:1421",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "视频内容提取器",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 900,
+        "minHeight": 600,
+        "center": true,
+        "transparent": false,
+        "decorations": false,
+        "shadow": true,
+        "visible": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": {
+      "resources/app-runtime/*.dll": ".",
+      "resources/dy-mcp/*.py": "resources/dy-mcp/",
+      "resources/bin/": "resources/bin/",
+      "resources/python-embed/": "resources/python-embed/",
+      "resources/ffmpeg/": "resources/ffmpeg/",
+      "resources/runtime-manifest.json": "resources/runtime-manifest.json"
+    },
+    "externalBin": [],
+    "windows": {
+      "nsis": {
+        "installerIcon": "icons/icon.ico",
+        "headerImage": "icons/header.bmp",
+        "sidebarImage": "icons/sidebar.bmp",
+        "installMode": "currentUser",
+        "languages": [
+          "SimpChinese"
+        ],
+        "displayLanguageSelector": false,
+        "installerHooks": "nsis/public-hooks.nsh"
+      },
+      "webviewInstallMode": {
+        "type": "offlineInstaller",
+        "silent": true
+      }
+    },
+    "licenseFile": "nsis/license.txt",
+    "shortDescription": "秋实KL B站视频文案采集与创作工作台",
+    "longDescription": "视频内容提取器用于采集参考文案、整理文案库、进行 AI 对话写作，并保存和导出自己的脚本。"
+  }
+}

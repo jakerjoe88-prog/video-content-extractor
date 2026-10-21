@@ -1,0 +1,131 @@
+[package]
+name = "qiushikl-bilibili"
+version = "1.2.1"
+description = "短视频文案采集、文案库与 AI 写作工作台"
+authors = ["you"]
+edition = "2021"
+
+[lib]
+name = "douyin_creator_tools_lib"
+# crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# Tauri 核心
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-notification = "2"
+
+# 序列化
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# 异步运行时
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs", "sync", "time"] }
+
+# 错误处理
+anyhow = "1"
+thiserror = "2"
+
+# SQLite 数据库
+rusqlite = { version = "0.32", features = ["bundled"] }
+r2d2 = "0.8"
+r2d2_sqlite = "0.25"
+
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+
+# 目录管理
+dirs = "5"
+
+# 同步原语
+once_cell = "1"
+parking_lot = "0.12"
+
+# Sherpa-ONNX for ASR (语音识别)
+# 注释掉 - 改用 Python sherpa-onnx 服务，避免 C++ 编译
+# sherpa-rs = { version = "0.6", default-features = false, features = [] }
+
+# 并行处理（用于批量转写）
+rayon = "1.10"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+
+# 音频处理 - 不再需要，Python 服务处理
+# hound = "3"
+
+# HTTP 客户端 (用于模型下载和抖音解析)
+reqwest = { version = "0.12", default-features = false, features = ["stream", "json", "native-tls", "cookies", "blocking"] }
+
+# 纯同步 HTTP 客户端 (用于 ASR 服务调用，避免 tokio runtime 冲突)
+ureq = { version = "2", default-features = false, features = ["json", "native-tls"] }
+
+# 异步流处理
+futures-util = { version = "0.3", default-features = false, features = ["std"] }
+
+# Base64 编码
+base64 = "0.22"
+
+# Word 文档生成
+docx-rs = "0.4"
+
+# ZIP 处理（用于解析 docx）
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+# PDF 文档解析
+pdf-extract = "0.7"
+
+# UUID 生成
+uuid = { version = "1", features = ["v4"] }
+
+# 正则表达式 (用于解析抖音页面)
+regex = "1"
+
+# URL 编码解码
+urlencoding = "2"
+
+# ONNX Runtime (用于知识库语义嵌入)
+ort = { version = "2.0.0-rc.11", features = ["copy-dylibs", "ndarray"] }
+
+# Tokenizers - 纯 Rust 实现
+rust_tokenizers = "8"
+
+# 多维数组 (用于 ONNX 张量操作)
+ndarray = "0.16"
+
+[target.'cfg(windows)'.dependencies]
+# Windows API for rounded corners
+windows = { version = "0.58", features = ["Win32_Foundation", "Win32_Graphics_Dwm"] }
+windows-dpapi = "0.1"
+
+[dev-dependencies]
+# 属性测试
+proptest = "1"
+tempfile = "3"
+
+# Release 构建优化
+[profile.release]
+# 启用 LTO 优化（减小二进制大小，提升性能）
+lto = "thin"
+# 优化级别
+opt-level = 3
+# 代码生成单元（1 = 最大优化，编译较慢）
+codegen-units = 1
+# 移除调试符号
+strip = "symbols"
+# 启用 panic = abort 减小二进制大小
+panic = "abort"
+
+# Dev 构建优化（加快编译速度）
+[profile.dev]
+opt-level = 0
+# 依赖使用优化编译（加快运行速度）
+[profile.dev.package."*"]
+opt-level = 2

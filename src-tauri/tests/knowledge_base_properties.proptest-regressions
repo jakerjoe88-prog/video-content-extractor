@@ -1,0 +1,9 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc c80f75c55573096c7d6a49071084e8bfd24a43f9f5590cc351629b1b3a607a83 # shrinks to content = "AA\u{202f}a0Aaaa\u{85}\u{205f}a0AAa\u{2000}\u{85}\u{a0}\u{2028}", category = "aaa"
+cc ba9e9822460d8c2c7926a719db4ed6d3dce72beabb8eeb85488bdbfa4b833ee3 # shrinks to content = "\u{205f}a\u{85}\u{2000}\t0 \u{1680}\u{202f}\u{205f}\u{a0}a\u{205f}A\u{2000}A\u{a0}  a\u{2028}A\u{2000}a\u{2028}A\u{1680}\u{2000}A\u{2028}\u{205f}\t\u{a0}\t\tAa\u{205f}\u{85}\u{3000}A A\u{a0}\u{3000}a\t\u{a0}a\u{205f}", category = "aaa"
+cc 06e4a57671a6f2dc79ec61b5466953a9aeca394d48183d2b66ec3badc3d01ee7 # shrinks to content = "\t\u{2028}0\u{3000}\taa\u{85}\u{205f}\u{1680}A \u{a0}\u{2028}\u{205f}\u{a0}a0\u{a0}aA\u{1680}\u{205f}\u{2000}\u{1680}\u{2000}a\u{202f}\u{2000}\u{1680}A\u{202f}\u{1680}0a Aa\u{1680}aa\u{a0}Aa\u{2000}0 A\u{202f}aA0a\u{1680}\u{205f}\u{85} \u{3000}A\u{202f}AA 0\u{a0}Aa\u{2000}aA\t\u{2000}\u{a0}a\u{1680}\u{202f}\u{3000}\u{85}0\u{85}a\ta\u{2000}aaAa0\t\u{2000}\u{1680}a\t\u{85} \u{205f}\u{85}0\u{3000}\u{2028}\t\u{2028}A\t0\u{3000}aAA0a\u{85}\u{1680}", category = "aaa"

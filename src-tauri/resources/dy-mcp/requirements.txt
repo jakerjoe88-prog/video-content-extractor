@@ -1,0 +1,6 @@
+requests
+yt-dlp==2026.8.19
+fastapi
+uvicorn
+pydantic
+sherpa-onnx

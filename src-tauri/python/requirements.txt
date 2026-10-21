@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+httpx
+pydantic
+
+# GPU ASR 依赖 - sherpa-onnx Python 绑定
+# 支持 DirectML GPU 加速，安装简单
+sherpa-onnx

@@ -1,0 +1,92 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# Rust 编译产物
+src-tauri/target/
+target/
+
+# 前端构建产物
+dist/
+.vite/
+
+# Python 环境（太大，用户自己安装）
+src-tauri/resources/python-embed/
+src-tauri/resources/python-env/
+src-tauri/resources/ffmpeg/
+src-tauri/resources/runtime-manifest.json
+src-tauri/tools/ffmpeg/
+src-tauri/knowledge_base.db
+src-tauri/resources/dy-mcp/__pycache__/
+src-tauri/resources/dy-mcp/media/*.png
+
+# 模型文件（太大，需单独下载）
+models/
+*.onnx
+
+# 日志和临时文件
+*.log
+*.tmp
+.cache/
+temp/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE 配置（可选保留）
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 环境变量（敏感信息）
+.env
+.env.local
+.env.*.local
+
+# 构建日志
+build*.log
+
+# 本地排查/迁移临时文件
+repo.zip
+repo-full.zip
+repo_extract/
+repo_extract_full/
+root_page.html
+src_page.html
+src_tauri_page.html
+test_audio.wav
+_settings_raw.tsx
+_settings_raw_utf8.tsx
+
+# Private local development state and verification artifacts
+.local/
+artifacts/
+src-tauri/resources/app-runtime/
+**/__pycache__/
+*.pyc
+*.token
+*.cookies.txt
+
+# Public source repository: never commit runtime binaries or personal state.
+*.dll
+*.exe
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.token
+*.pem
+*.key
+.env.*
+!.env.example
+**/session.json
+**/storage_state.json
+**/cookies*
+**/browser-profile/
+**/WebView2/
+**/EdgeProfile/
+src-tauri/resources/app-runtime/
