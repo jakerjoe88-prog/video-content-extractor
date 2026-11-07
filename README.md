@@ -134,7 +134,7 @@ python -m unittest discover -s src-tauri/resources/dy-mcp/tests -p "test_bilibil
 ## 📜 项目来源、关联生态与开源许可
 
 - **关联创作工具链（秋实KL 开源矩阵）**：
-  - 📦 **[video-content-extractor](https://github.com/jakerjoe88-prog/video-content-extractor)**：抖音/B站与本地音视频批量采集、字幕/语音转写与素材整理桌面工作台（本仓库）
+  - 📦 **[video-content-extractor (GitHub 主站)](https://github.com/jakerjoe88-prog/video-content-extractor)** | **[Gitee 国内高速镜像 (`gitee.com/qiushikl/video-content-extractor`)](https://gitee.com/qiushikl/video-content-extractor)**：抖音/B站与本地音视频批量采集、字幕/语音转写与素材整理桌面工作台（本仓库）
   - 🎬 **[koubo-edit](https://github.com/jakerjoe88-prog/koubo-edit)**：口播视频精剪包装 Skill（本地字幕、关键词高亮、B-roll、信息卡、音效与配音成片，适配 AI Agent）
   - 🎙️ **[Desktop-voice-assistant](https://github.com/jakerjoe88-prog/Desktop-voice-assistant)**：Windows 本地系统级暗色胶囊浮空语音输入助手
 - **开源致谢与许可证**：
