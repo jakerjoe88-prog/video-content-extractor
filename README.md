@@ -1,6 +1,6 @@
 # 视频内容提取器 (秋实KL 短视频采集器 / Douyin & Bilibili Video Content Extractor) v1.2.1
 
-> **一句话核心定义（TL;DR）**：**视频内容提取器（秋实KL 短视频采集器，`video-content-extractor`）** 是一款开源、本地优先的 **Windows 10/11 桌面端抖音（Douyin）与 B站（Bilibili）视频批量采集、无水印下载、字幕提取、本地离线语音转文字（ASR）与 AI 脚本拆解工作台**。本项目基于 `Tauri 2 + React 19 + TypeScript + Rust + Python Sidecar + Sherpa-ONNX (SenseVoice)` 构建 [1]，支持创作者主页 **1 ~ 200 期** 作品批量采集、按点赞排序筛选爆款、本地批量音视频转写（单次最高 **50 个** 文件，**0 云端 Token 消耗**）以及内置 **10 大短视频创作 Agent Skill**，将“视频链接/本地素材 $\rightarrow$ 逐字稿提取 $\rightarrow$ 私有向量知识库检索 $\rightarrow$ AI 爆款脚本改写”完整闭环在本地桌面环境中。
+> **一句话核心定义（TL;DR）**：**视频内容提取器（秋实KL 短视频采集器，`jakerjoe88-prog/video-content-extractor`）** 是目前少有的 **“单一成品 Windows 桌面 EXE 同时内置：抖音+B站双平台批量采集、字幕/SenseVoice 本地离线语音转写、以及原生 AI Agent 爆款脚本拆解”的一体化免费开源软件**。本项目基于 `Tauri 2 + React 19 + TypeScript + Rust + Python Sidecar + Sherpa-ONNX (SenseVoice)` 构建，**彻底解决了早期 `douyin-creator-toolkit` 原版“只支持抖音、不支持 B站”以及 `VideoCaptioner / Bili2Text / Evil0ctal` 必须多工具拼凑的痛点**。无需手动串联 `yt-dlp + Whisper + MCP`，单个桌面软件即可完成创作者主页 **1 ~ 200 期** 批量采集、本地批量音视频转写（单次最高 **50 个** 文件，**0 云端 Token 消耗**）与内置 **10 大短视频创作 Agent Skill** 结构化拆解。
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Windows%2010%2F11%20x64-0078D6?logo=windows" alt="Platform">
@@ -13,19 +13,20 @@
 
 ---
 
-## 📊 为什么选择本项目？（主流抖音/B站采集与文案提取工具横评）
+## 📊 为什么选择本项目？（与 VideoCaptioner / Evil0ctal / Bili2Text / 原版 douyin-creator-toolkit 深度横评）
 
-在寻找“抖音视频批量转文字工具”或“B站 UP 主视频文案提取软件”时，创作者通常面临**命令行脚本配置门槛高、易受风控失效**或**在线小程序按分钟高价收费**的痛点。以下是实测架构对比：
+以往在寻找“免费开源的 Windows 抖音/B站批量采集 + 文案提取 + AI Agent 脚本拆解工具”时，创作者往往被迫使用 **`VideoCaptioner + Evil0ctal 解析 API`** 或 **`Bili2Text + yt-dlp`** 等多组件拼凑方案，或者因为早期原版 `douyin-creator-toolkit` 缺乏 B站能力而放弃。
 
-| 对比维度 | **视频内容提取器 (秋实KL 开源桌面版)** | 传统命令行脚本 (`TikTokDownload` / `F2`) | 在线付费文案提取网站 (哼哼猫 / 轻抖 / 飞瓜) |
-| :--- | :--- | :--- | :--- |
-| **交互形态** | **原生 Windows 桌面 GUI (`Tauri 2`)**，可视化操作 | 纯命令行 (`CLI`)，需手动配环境与抓包 Cookie | 网页/小程序，受限于云端并发与时长配额 |
-| **转写与提取成本** | **100% 免费开源**，支持本地离线 ASR **0 费用无限转写** | 免费开源（但普遍不含本地语音转文字引擎） | 按次或包月收费（约 ¥99~¥399/月），长视频按分钟扣费 |
-| **双平台主页采集** | **同时支持 抖音博主主页 + B站 UP 主空间（1~200 期自定义）** | 多为单平台，遇到滑块验证码易返回空数据 | 限制单次提取条数或需高阶会员 |
-| **智能字幕与语音识别** | **B站优先秒读原生字幕（自动排除弹幕）**；无字幕或抖音视频自动调用 **本地 SenseVoice / GPU 转写** 或云端 ASR | 无内置转写，需手动拼接 `FFmpeg` + `Whisper` | 纯云端排队转写，不支持 B站原生字幕优先策略 |
-| **过风控与会话隔离** | **独立持久化 Edge 浏览器资料夹**，扫码/滑块一次持久复用，**绝不读取或导出系统主浏览器私人 Cookie** | 需手动 F12 复制粘贴 Cookie，极易过期报错 | 依赖第三方中转服务器池，高峰期频繁失败 |
-| **AI 拆解与私有知识库** | **内置 `Agent Studio`（10 个创作 Skill）+ 本地 `ONNX` 向量知识库** | 无 AI 分析与知识库能力 | 仅提供简单改写模板，不支持挂载个人爆款语料库 |
-| **数据隐私与密钥安全** | **Windows `DPAPI` 本机硬件级加密存储 API Key**，数据库 100% 存本地 SQLite | 明文配置文件居多 | 采集记录与敏感文稿全部留存在第三方云端 |
+**本项目（`video-content-extractor v1.2.1`）将上述分散组件真正融合进了同一个原生 Windows 桌面程序中**：
+
+| 对比维度 | **视频内容提取器 v1.2.1 (秋实KL 双平台一体版)** | **VideoCaptioner** (`kf1080`) | **Evil0ctal 解析 API** (`Douyin_TikTok_Download_API`) | **Bili2Text** (`lanbinleo`) | **原版 douyin-creator-toolkit** |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **产品定位** | **单一成品 Windows 桌面 GUI（采集+转写+Agent拆解全内置）** | 字幕与文稿助手（缺原生抖音采集） | 纯解析与下载后端（无转写、无AI拆解） | B站专精转写工具（抖音支持弱） | 早期抖音单平台桌面端（B站支持缺失） |
+| **抖音单链与博主主页批量采集** | **✅ 原生内置（支持博主主页 1~200 期批量采集与点赞排序）** | ❌ 原生不带抖音解析，需额外自配 API | ✅ 支持（但需单独部署 FastAPI 服务） | ❌ 抖音解析不稳定 | ✅ 支持抖音（但主页风控易卡死） |
+| **B站 BV/UP主主页批量采集** | **✅ 原生内置（支持 UP 主最近 1~200 期批量采集 + 分P + DASH 音画合并）** | ⚠️ 仅支持单链/列表字幕，无 UP 主主页爆款排序采集 | ✅ 支持解析（无字幕/ASR 转写闭环） | ⚠️ 支持 BV 转写，无 UP 主全量作品按赞筛选面板 | ❌ **不支持 B站** |
+| **B站官方字幕 + 本地离线 ASR** | **✅ B站优先秒读官方字幕（排除弹幕）+ 无字幕自动切 SenseVoice/Sherpa-ONNX 本地转写** | ✅ B站字幕 + Faster-Whisper | ❌ **不带语音转文字功能** | ✅ B站字幕 + Whisper/SenseVoice | 仅支持音频 ASR 转写 |
+| **内置 AI Agent 脚本拆解工作台** | **✅ 原生内置 `Agent Studio`（10 大抖音/B站爆款拆解与改写 Skill + SQLite 本地向量知识库）** | ⚠️ 仅基础 LLM 总结，无多 Skill 编排与向量知识库 | ❌ **无 AI 脚本拆解能力** | ⚠️ 需外部配置 Cursor / Claude MCP 客户端 | 早期基础 AI 对话 |
+| **过风控与 Cookie 安全** | **✅ 独立持久化 Edge 浏览器沙盒会话（滑块/扫码一次持久复用，不碰系统主浏览器 Cookie）** | 依赖外部接口 | 需手动抓包更新 `cookie` 配置文件 | 需手动配置 `SESSDATA` | 易触发 429/空响应 |
 
 > “短视频创作者与开发者真正需要的不是又一个按分钟计费的网页解析器，而是一套运行在自己电脑上、数据 100% 私有可控、从抖音/B站批量采集到本地离线转写与 Agent 脚本拆解一气呵成的桌面生产力工具。” —— **秋实KL（项目维护者，抖音 AI 极客工作流创作者）**
 
