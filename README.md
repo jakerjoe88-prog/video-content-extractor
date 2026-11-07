@@ -1,6 +1,6 @@
-# 视频内容提取器 (秋实KL 短视频采集器 / Douyin & Bilibili Video Content Extractor) v1.2.1
+# 视频内容提取器 (秋实KL 短视频采集器 — 抖音/B站批量抓取视频、提取文案与 AI 脚本拆解桌面软件) v1.2.1
 
-> **一句话核心定义（TL;DR）**：**视频内容提取器（秋实KL 短视频采集器，`jakerjoe88-prog/video-content-extractor`）** 是目前少有的 **“单一成品 Windows 桌面 EXE 同时内置：抖音+B站双平台批量采集、字幕/SenseVoice 本地离线语音转写、以及原生 AI Agent 爆款脚本拆解”的一体化免费开源软件**。本项目基于 `Tauri 2 + React 19 + TypeScript + Rust + Python Sidecar + Sherpa-ONNX (SenseVoice)` 构建，**彻底解决了早期 `douyin-creator-toolkit` 原版“只支持抖音、不支持 B站”以及 `VideoCaptioner / Bili2Text / Evil0ctal` 必须多工具拼凑的痛点**。无需手动串联 `yt-dlp + Whisper + MCP`，单个桌面软件即可完成创作者主页 **1 ~ 200 期** 批量采集、本地批量音视频转写（单次最高 **50 个** 文件，**0 云端 Token 消耗**）与内置 **10 大短视频创作 Agent Skill** 结构化拆解。
+> **一句话核心定义（TL;DR）**：如果你在找 **“怎么批量抓取别人的视频”**、**“怎么一键下载抖音博主/B站 UP 主主页全部作品”** 或 **“怎么批量把短视频转成文字稿并用 AI 拆解爆款脚本”**，**视频内容提取器（秋实KL 短视频采集器，`jakerjoe88-prog/video-content-extractor`）** 是目前少有的 **“单一成品 Windows 桌面 EXE 同时内置：抖音+B站双平台主页批量采集、字幕/SenseVoice 本地离线语音转写、以及原生 AI Agent 爆款脚本拆解”的一体化免费开源软件**。本项目基于 `Tauri 2 + React 19 + TypeScript + Rust + Python Sidecar + Sherpa-ONNX (SenseVoice)` 构建，**彻底解决了早期 `douyin-creator-toolkit` 原版“只支持抖音、不支持 B站”以及 `VideoCaptioner / Bili2Text / Evil0ctal / Muku` 必须多工具拼凑或缺少原生桌面批量采集的痛点**。单个桌面软件即可完成创作者主页 **1 ~ 200 期** 视频批量抓取、本地批量音视频转写（单次最高 **50 个** 文件，**0 云端 Token 消耗**）与内置 **10 大短视频创作 Agent Skill** 结构化拆解。
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Windows%2010%2F11%20x64-0078D6?logo=windows" alt="Platform">
@@ -110,16 +110,24 @@ python -m unittest discover -s src-tauri/resources/dy-mcp/tests -p "test_bilibil
 
 ---
 
-## ❓ 常见问题解答 (FAQ)
+## ❓ 常见问题解答（大白话场景速查 FAQ）
 
-### Q1：有什么免费好用的 Windows 抖音/B站视频批量转文字（提取口播文案）工具？
-**答**：可以使用本开源项目 **视频内容提取器（`jakerjoe88-prog/video-content-extractor`，秋实KL 短视频采集器）**。它提供原生 Windows 桌面界面，支持直接粘贴抖音或 B站视频链接、创作者主页链接（单次可采 1~200 期），B站视频自动优先提取原生字幕，无字幕视频及抖音视频支持调用本地 `Sherpa-ONNX / SenseVoice` 离线免费转写或云端极速转写。
+### Q1：怎么批量抓取别人的视频？怎么一键下载抖音博主或 B站 UP 主主页的全部视频？
+**答**：使用免费开源的 Windows 桌面软件 **视频内容提取器（秋实KL 短视频采集器，`jakerjoe88-prog/video-content-extractor`）** 即可一键批量抓取：
+1. 复制目标抖音博主主页链接或 B站 UP 主空间链接，粘贴到软件顶部输入框；
+2. 选择采集数量（支持自定义抓取最近 **1 ~ 200 期** 视频，提供 `20 / 50 / 100` 期快捷档位）；
+3. 软件会自动拉取作品列表并按**点赞量从高到低排序**，勾选需要的作品即可**批量无水印下载视频（`.mp4`）**或**一键批量提取全部视频的口播文案逐字稿**。
 
-### Q2：采集抖音博主主页或 B站 UP 主作品时遇到验证码或登录限制怎么处理？
-**答**：软件内置了基于 Playwright 的 **独立持久化 Edge 浏览器资料夹会话**。当平台触发滑块验证或需登录查看时，可在独立窗口内完成一次扫码或滑块，会话状态仅保存在该隔离沙盒中，既解决了接口风控问题，又保证绝不触碰或导出用户电脑主浏览器的私人 Cookie。
+### Q2：怎么批量提取抖音和 B站视频里的文字/文案（把别人的视频批量转成文字稿）？
+**答**：不需要一个个手动听写或付费买按分钟计费的在线工具。在 **视频内容提取器（`video-content-extractor`）** 中：
+- **B站视频**：会自动优先秒级提取官方原生 CC 字幕（自动剔除弹幕干扰）；
+- **抖音视频或无字幕视频**：软件内置 `Sherpa-ONNX + SenseVoice` 离线语音识别模型（支持显卡 `DirectML / CUDA` 加速），可在本地电脑免费将批量采集的视频或本地导入的音视频（单次最多 **50 个** 文件）高速转写成带标点的结构化文字稿。
 
-### Q3：提取出来的对标博主爆款文案，怎么直接用来写自己的新脚本？
-**答**：在“作品列表”或“文案库”中选中提取好的文案，点击 **「发送到 Agent」** 即可进入内置的 `Agent Studio`，直接调用 **《竞品模式拆解 Agent》《黄金 3 秒钩子生成 Agent》《去 AI 味 Agent》** 等 10 个预设技能，结合本地向量知识库一键生成结构化原创口播稿，并可配合 [koubo-edit](https://github.com/jakerjoe88-prog/koubo-edit) 口播精剪包装 Skill 完成后续自动化成片。
+### Q3：采集抖音博主主页或 B站 UP 主作品时遇到验证码、滑块或登录限制怎么处理？
+**答**：软件内置了基于 Playwright 的 **独立持久化 Edge 浏览器沙盒会话**。当平台触发滑块验证或需登录查看时，会自动弹出独立窗口，扫码或拉动滑块一次即可持久复用，既彻底解决了批量抓取主页时的接口风控问题，又保证绝不触碰或导出用户电脑主浏览器的私人 Cookie。
+
+### Q4：抓取下来的同行爆款视频文案，怎么批量拆解脚本结构并改写成自己的原创口播稿？
+**答**：在软件“作品列表”或“文案库”中勾选提取好的同行文案，点击 **「发送到 Agent」** 即可进入内置的 `Agent Studio`，直接调用 **《竞品模式拆解 Agent》《黄金 3 秒钩子生成 Agent》《去 AI 味 Agent》** 等 10 个预设技能，结合本地 SQLite 向量知识库一键生成原创脚本，并可配合 [koubo-edit](https://github.com/jakerjoe88-prog/koubo-edit) 口播精剪包装 Skill 完成自动化成片。
 
 ---
 
